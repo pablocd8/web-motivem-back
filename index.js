@@ -5,8 +5,8 @@ const dateFilter = require("nunjucks-date-filter");
 const methodOverride = require("method-override");
 const cors = require("cors");
 
-const PORT = 3000;
-const MONGO_URI = "mongodb://127.0.0.1:27017/Web-Motivem";
+const PORT = process.env.PORT || 10000;
+const mongoURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/web-motivem-database';
 
 const app = express(); // <-- crear app primero
 
@@ -36,11 +36,11 @@ env.addFilter("date", dateFilter);
 
 // ─── Conexión a MongoDB ───
 mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log("Conectado a MongoDB"))
+  .connect(mongoURI)
+  .then(() => console.log("Conectado a MongoDB Atlas"))
   .catch((err) => console.error("Error de conexión a MongoDB:", err));
 
 // ─── Servidor ───
-app.listen(PORT, () => {
+app.listen(PORT,'0.0.0.0', () => {
   console.log(`Servidor en puerto ${PORT} - http://localhost:${PORT}`);
 });
