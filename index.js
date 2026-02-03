@@ -15,7 +15,7 @@ const allowedOrigins = ["http://localhost:5173"]; // frontend
 app.use(cors({
   origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type"]
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 // ─── Middlewares ───
@@ -24,15 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 // ─── Rutas ───
-app.use("/api/talleres", require("./routes/taller"));
+app.use("/api/talleres", require("./routes/pdf"));
 
-// ─── Nunjucks ───
-app.set("view engine", "njk");
-const env = nunjucks.configure("views", {
-  autoescape: true,
-  express: app,
-});
-env.addFilter("date", dateFilter);
 
 // ─── Conexión a MongoDB ───
 mongoose
