@@ -11,7 +11,7 @@ const mongoURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/web-motivem
 const app = express(); // <-- crear app primero
 
 // ─── Configuración CORS ───
-const allowedOrigins = ["http://localhost:5173"]; // frontend
+const allowedOrigins = ["https://web-motivem-8bo6.vercel.app"]; // frontend
 app.use(cors({
   origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -25,7 +25,7 @@ app.use(methodOverride("_method"));
 
 // ─── Rutas ───
 app.use("/api/talleres", require("./routes/pdf"));
-
+app.use("/api/pdf",require("./routes/pdf"));
 
 // ─── Conexión a MongoDB ───
 mongoose
