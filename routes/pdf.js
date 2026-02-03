@@ -12,7 +12,7 @@ router.get("/descargar", (req, res) => {
         });
     }
 
-    const filePath = path.join(__dirname, "../files/guia-para-familias.pdf");
+    const filePath = path.join(__dirname, "files/guia-para-familias.pdf");
 
     res.download(filePath, "guia-para-familias.pdf");
 });
