@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get("/descargar", (req, res) => {
     const authHeader = req.headers.authorization;
+    console.log(req.headers);    
 
     if (!authHeader) {
         return res.status(401).json({
@@ -12,7 +13,7 @@ router.get("/descargar", (req, res) => {
         });
     }
 
-    const filePath = path.join(__dirname, "files/guia-para-familias.pdf");
+    const filePath = path.join(__dirname, "../files/guia-para-familias.pdf");
 
     res.download(filePath, "guia-para-familias.pdf");
 });
