@@ -11,6 +11,7 @@ const app = express();
 // ─── Configuración CORS ───
 const allowedOrigins = [
   "http://localhost:5173",                // frontend local
+  "http://127.0.0.1:5173",                
   "https://web-motivem-8bo6.vercel.app"  // frontend Vercel
 ];
 
@@ -26,16 +27,7 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-// ─── Middleware para manejar preflight OPTIONS requests ───
-app.use((req, res, next) => {
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
-    res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    return res.sendStatus(200);
-  }
-  next();
-});
+
 
 // ─── Middlewares ───
 app.use(express.json());
@@ -44,6 +36,8 @@ app.use(methodOverride("_method"));
 
 // ─── Rutas ───
 app.use("/api/pdf", require("./routes/pdf"));
+app.use("/api/auth", require("./routes/auth"));
+
 
 
 // ─── Conexión a MongoDB ───
